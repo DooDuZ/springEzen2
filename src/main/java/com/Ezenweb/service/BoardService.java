@@ -2,6 +2,7 @@ package com.Ezenweb.service;
 
 import com.Ezenweb.domain.dto.BcategoryDto;
 import com.Ezenweb.domain.dto.BoardDto;
+import com.Ezenweb.domain.dto.PageDto;
 import com.Ezenweb.domain.entity.bcategory.BcategoryEntity;
 import com.Ezenweb.domain.entity.bcategory.BcategoryRepository;
 import com.Ezenweb.domain.entity.board.BoardEntity;
@@ -111,18 +112,26 @@ public class BoardService {
     public boolean setboard( BoardDto boardDto ){
         // ---------- 로그인 회원 찾기 메소드 실행 --> 회원엔티티 검색 --------------  //
         MemberEntity memberEntity = memberService.getEntity();
+        System.out.println("test");
+
         if( memberEntity == null ){ return false; }
         // ---------------------------- //
         // ------------ 선택한 카테고리 번호 --> 카테고리 엔티티 검색 --------------  //
+
+        System.out.println(boardDto.toString());
+
         Optional<BcategoryEntity> optional = bcategoryRepository.findById( boardDto.getBcno() );
         if ( !optional.isPresent()) { return false;}
         BcategoryEntity bcategoryEntity = optional.get();
+
+        System.out.println("test2");
         // --------------------------  //
+
         BoardEntity boardEntity  = boardRepository.save( boardDto.toEntity() );  // 1. dto --> entity [ INSERT ] 저장된 entity 반환
         if( boardEntity.getBno() != 0 ){   // 2. 생성된 entity의 게시물번호가 0 이 아니면  성공
 
             fileupload( boardDto , boardEntity ); // 업로드 함수 실행
-
+            System.out.println("test3");
             // 1. 회원 <---> 게시물 연관관계 대입
             boardEntity.setMemberEntity( memberEntity ); // ***!!!! 5. fk 대입
             memberEntity.getBoardEntityList().add( boardEntity); // *** 양방향 [ pk필드에 fk 연결 ]
@@ -135,19 +144,16 @@ public class BoardService {
     }
     // 2. 게시물 목록 조회
     @Transactional      // bcno : 카테고리번호 , page : 현재 페이지번호 , key : 검색필드명 , keyword : 검색 데이터
-    public List<BoardDto> boardlist(  int page , int bcno , String key , String keyword  ){
+    public PageDto boardlist(PageDto pageDto){
+
+        int page = pageDto.getPage();
+
         Page<BoardEntity> elist = null; // 1. 페이징처리된 엔티티 리스트 객체 선언
         Pageable pageable = PageRequest.of(  // 2.페이징 설정 [ 페이지시작 : 0 부터 ] , 게시물수 , 정렬
                 page-1 , 3 , Sort.by( Sort.Direction.DESC , "bno")  );
-        // 3. 검색여부 / 카테고리  판단
-        if( key.equals("btitle") ){ // 검색필드가 제목이면
-            elist = boardRepository.findbybtitle( bcno , keyword , pageable);
-        }else if( key.equals("bcotent") ){ // 검색필드가 제목이면
-            elist = boardRepository.findbybcontent( bcno , keyword , pageable);
-        }else{ // 검색이 없으면 // 카테고리 출력
-            if( bcno == 0  ) elist = boardRepository.findAll( pageable);
-            else elist = boardRepository.findBybcno( bcno , pageable);
-        }
+
+        // 검색 처리
+        elist = boardRepository.findbySearch( pageDto.getBcno(), pageDto.getKey(), pageDto.getKeyword(), pageable);
 
         // 프론트엔드에 표시할 페이징번호버튼 수
         int btncount = 5;                               // 1.페이지에 표시할 총 페이지 버튼 개수
@@ -160,10 +166,12 @@ public class BoardService {
             dlist.add( entity.toDto() );
         }
 
-        dlist.get(0).setStartbtn( startbtn );
-        dlist.get(0).setEndbtn( endbtn );
+        pageDto.setList(dlist);
+        pageDto.setStartbtn(startbtn);
+        pageDto.setEndbtn(endbtn);
+        pageDto.setTotalBoards(elist.getTotalElements());
 
-        return dlist;  // 4. 변환된 리스트 dist 반환
+        return pageDto;  // 4. 변환된 리스트 dist 반환
     }
     // 3. 게시물 개별 조회
     @Transactional
@@ -217,7 +225,7 @@ public class BoardService {
         }else{  return false;  }
     }
     // 6. 카테고리 등록
-    public boolean setbcategory(  BcategoryDto bcategoryDto ){
+    public boolean setbcategory( BcategoryDto bcategoryDto ){
         BcategoryEntity entity =  bcategoryRepository.save(  bcategoryDto.toEntity() );
         if( entity.getBcno() != 0 ){ return  true;}
         else{ return false; }

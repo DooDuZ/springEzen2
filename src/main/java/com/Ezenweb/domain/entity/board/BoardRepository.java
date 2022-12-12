@@ -24,6 +24,8 @@ public interface BoardRepository extends JpaRepository< BoardEntity , Integer  >
 //    @Query( value = "select p from board p where p.bcno = ?1")
 //    Page<BoardEntity> findBybcno( int bcno ,  Pageable pageable);
 
+
+    /*
     // 1. 제목 검색
     @Query( value = "select * from board where bcno = :bcno and btitle like %:keyword%" , nativeQuery = true )
     Page<BoardEntity> findbybtitle( int bcno , String keyword , Pageable pageable);
@@ -33,5 +35,14 @@ public interface BoardRepository extends JpaRepository< BoardEntity , Integer  >
     // 3. 검색이 없을때
     @Query( value = "select * from board where bcno = :bcno " , nativeQuery = true)
     Page<BoardEntity> findBybcno(@Param("bcno") int bcno , Pageable pageable);
+    */
 
+    // 위 메서드 통합
+    @Query( value = "SELECT * " +
+            "FROM " +
+            "board " +
+            "WHERE " +
+            "IF( :bcno = 0 , bcno like '%%' , bcno = :bcno  ) and " +
+            "IF( :key = '' , true , IF( :key = 'btitle' ,  btitle like %:keyword% , bcontent like %:keyword%  ) )" , nativeQuery = true )
+    Page<BoardEntity> findbySearch( int bcno , String key , String keyword , Pageable pageable);
 }

@@ -5,7 +5,7 @@
        // 2. 함수 : useState 라이브러리
 */
 // ------- 1. 현재 페이지에서 사용될 라이브러리 import ------ //
-import React , { useState }  from 'react';
+import React, {useEffect, useState} from 'react';
 // * 오류 : return 한번이기때문에 재 렌더링 불가능
 //export default function Counter( props ) {
 //    // ------- 2. JS 혹은 라이브러리 ----------------------------- //
@@ -30,6 +30,12 @@ export default function Counter( props ) {
             // count : 1.변수명 [ 식별자 ]
             // setCount : 2.해당 변수의 값을 변경하는 함수명 [ setter ]
     // ------- 3. 렌더링 되는 HTML + JSX 표현식 { } + 컴포넌트 ---- //
+
+    useEffect( () =>{
+            document.title = `총 ${count}번 클릭했습니다.`
+        }
+    )
+
     return (
         <div>
             <p> 총 { count }번 클릭했습니다. </p>

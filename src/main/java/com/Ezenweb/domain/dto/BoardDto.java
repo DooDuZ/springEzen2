@@ -22,6 +22,8 @@ public class BoardDto {
     private int startbtn;
     private int endbtn;
 
+    private String bdate;
+
     //1. 형변환
     public BoardEntity toEntity(){
         // * 생성자를 이용한 객체 생성 [ *빌더패턴 비교 ]

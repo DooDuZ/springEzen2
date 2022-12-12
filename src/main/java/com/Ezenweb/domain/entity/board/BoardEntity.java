@@ -8,6 +8,8 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity // 엔티티 정의
 @Table(name = "board") // 테이블명 정의
@@ -50,6 +52,10 @@ public class BoardEntity extends BaseEntity {
                 .bview( this.bview )
                 .memail( this.memberEntity.getMemail() )
                 .bfilename( this.bfile )
+                .bdate(this.getCdate().toLocalDate().toString().equals(LocalDateTime.now().toLocalDate().toString()) ?
+                        this.getCdate().toLocalTime().toString() :
+                        this.getCdate().toLocalDate().toString()
+                )
                 .build();
     }
 }
@@ -69,6 +75,4 @@ public class BoardEntity extends BaseEntity {
     @ManyToOne       n : 1      회원이 여러개의 게시물을 작성 가능
     @OneToMany       1 : n
     @ManyToMany      n : n
-
-
  */

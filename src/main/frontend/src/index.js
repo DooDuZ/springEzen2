@@ -12,6 +12,13 @@ import Clock from './Book/chapter4/Clock' // 4장
 import CommentList from './Book/chapter5/CommentList' // 5장
 import NotificationList from './Book/chapter6/NotificationList' // 6장
 import Counter from './Book/chapter7/Ex1_Hook' // 7장
+import Tester from './Book/chapter8/Tester'
+import ConfirmButton from "./Book/chapter8/ConfirmButton";
+import ConfirmButton2 from "./Book/chapter8/ConfirmButton2";
+import TestState from "./Book/chapter8/TestState";
+import LandingPage from "./Book/chapter9/LandingPage";
+import BookList from "./Book/BookList";
+import SignUp from "./Book/chapter11/SignUp";
 
 // 2. Dom 컨테이너 [ public-> index.html 안에 있는 태그 ]
 const root = ReactDOM.createRoot(document.getElementById('root'));

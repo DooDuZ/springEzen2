@@ -22,6 +22,17 @@ import BoardList from './board/BoardList';
 // 라우터 설치[ 터미널 ] : npm i react-router-dom == npm install react-router-dom
 // import { 컴포넌트명 } from 'react-router-dom'; v6
 import { HashRouter, BrowserRouter, Routes, Route, Link,  Router } from "react-router-dom";
+import BoardWrite from "./board/BoardWrite";
+import BookList from "../Book/BookList";
+import Library from "../Book/chapter3/Library";
+import Clock from "../Book/chapter4/Clock";
+import CommentList from "../Book/chapter5/CommentList";
+import NotificationList from "../Book/chapter6/NotificationList";
+import Accommodate from "../Book/chapter7/Accommodate";
+import ConfirmButton from "../Book/chapter8/ConfirmButton";
+import LandingPage from "../Book/chapter9/LandingPage";
+import SignUp from "../Book/chapter11/SignUp";
+import BoardView from "./board/BoardView";
     // BrowserRouter : 가상 URL
     //  vs HashRouter :
     // Routes :  Route 목록/리스트
@@ -39,6 +50,18 @@ export default function Index( props ){
                         <Route path="/member/signup" element={ <Signup/> } />
                         <Route path="/member/login" element={ <Login/> } />
                         <Route path="/board/list" element={ <BoardList/> } />
+                        <Route path="/board/write" element={ <BoardWrite/> } />
+                        <Route path="/board/view/:bno" element={ <BoardView/> } />
+
+                        <Route path="/book/list" element={ <BookList/> } />
+                        <Route path="/chapter3/Library" element={<Library />} />
+                        <Route path="/chapter4/Clock" element={<Clock />} />
+                        <Route path="/chapter5/CommentList" element={<CommentList />} />
+                        <Route path="/chapter6/NotificationList" element={<NotificationList />} />
+                        <Route path="/chapter7/Accommodate" element={<Accommodate />} />
+                        <Route path="/chapter8/ConfirmButton" element={<ConfirmButton />} />
+                        <Route path="/chapter9/LandingPage" element={<LandingPage />} />
+                        <Route path="/chapter11/SignUp" element={<SignUp/>} />
                     </Routes>
                 <Footer/>
             </BrowserRouter>
