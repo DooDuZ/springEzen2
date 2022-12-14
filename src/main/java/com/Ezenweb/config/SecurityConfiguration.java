@@ -13,8 +13,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration // 설정 컴포넌트 주입
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
-
     @Autowired
     private MemberService memberService;
 
@@ -47,6 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .ignoringAntMatchers("/board/setbcategory")
                         .ignoringAntMatchers("/board/setboard")
                         .ignoringAntMatchers("/board/boardlist")
+                        .ignoringAntMatchers("/board/delboard")
+                        .ignoringAntMatchers("/board/upboard")
                 .and()
                     .oauth2Login() // 소셜 로그인 보안 설정
                     .defaultSuccessUrl("/")// 소셜 로그인 성공시 이동하는 URL

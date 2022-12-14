@@ -32,7 +32,7 @@ public class BoardController {
     // 1. 게시물목록 페이지 열기
     @GetMapping("/list") // URL  : localhost:8080/board/list 요청시 해당 html 반환
     public Resource getlist(){ return new ClassPathResource("templates/board/list.html"); }
-    // 2. 게시물쓰기 페이지 열기
+    // 2. 게시물쓰기 페이지 열기F
     @GetMapping("/write")// URL  : localhost:8080/board/write 요청시 해당 html 반환
     public Resource getwrite(){ return new ClassPathResource("templates/board/write.html"); }
     // 3. 게시물조회 페이지 열기
@@ -54,6 +54,7 @@ public class BoardController {
     // 1. 게시물 쓰기 [ 첨부파일 있을때 @RequestBody 지우기  ]
     @PostMapping("/setboard")
     public boolean setboard( BoardDto boardDto ){
+        System.out.println(boardDto.toString());
         return boardService.setboard(boardDto);
     }
     // 2. 게시물 목록 조회 [ 페이징,검색 ]

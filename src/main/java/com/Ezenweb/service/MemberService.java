@@ -95,6 +95,8 @@ public class MemberService
 
         if( object == null ) { return null; }
 
+
+
         // 2. 로그인된 회원번호
         // int mno = (Integer)object;
         MemberDto memberDto = (MemberDto) object;

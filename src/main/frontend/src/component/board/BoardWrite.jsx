@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 let bcno = 0;
+let bcontent = '';
 export default function BoardWrite(props){
-
     const [category, setCategory] = useState('');
     const [categoryList, setCategoryList] = useState([]);
 
@@ -20,7 +22,10 @@ export default function BoardWrite(props){
     }
 
     const getbcategory = () =>{
-        axios.get("/board/bcategorylist").then(res=>{setCategoryList(res.data); console.log(res.data)}).catch(err=>{console.log(err)})
+        axios
+            .get("/board/bcategorylist")
+            .then(res=>{setCategoryList(res.data);})
+            .catch(err=>{console.log(err)})
     }
 
     useEffect(getbcategory, []);
@@ -31,6 +36,7 @@ export default function BoardWrite(props){
         let boardform = document.querySelector('.boardform');
         let formdata = new FormData(boardform);
         formdata.set( "bcno", bcno );
+        formdata.set("bcontent", bcontent);
 
         axios.post("/board/setboard", formdata, {headers : {"Content-Type" : "multipart/form-data"}})
             .then( res => {
@@ -58,7 +64,18 @@ export default function BoardWrite(props){
 
             <form className="boardform">
                 제목 : <input type="text" name="btitle" />
-                내용 : <input type="text" name="bcontent" />
+                <CKEditor
+                    editor={ ClassicEditor }
+                    data="<p>Hello from CKEditor 5!</p>"
+                    onReady={ editor => {
+                        // You can store the "editor" and use when it is needed.
+                        console.log( 'Editor is ready to use!', editor );
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        bcontent = data;
+                    } }
+                />
                 첨부파일 : <input type="file" name="bfile" />
                 <button type="button" onClick={setboard}>등록</button>
             </form>

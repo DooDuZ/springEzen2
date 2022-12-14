@@ -47,7 +47,7 @@ public class BoardService {
     // private  BoardService boardService; // 불가능
 
     // 첨부파일 경로
-    String path = "C:\\Users\\504t\\Desktop\\springweb\\Ezenweb\\src\\main\\resources\\static\\bupload\\";
+    String path = "C:\\upload\\";
 
 
         // @Transactional : 엔티티 DML 적용 할때 사용되는 어노테이션
@@ -90,7 +90,7 @@ public class BoardService {
     // * 첨부파일 업로드 [ 1. 쓰기메소드 2. 수정메소드 ] 사용
     @Transactional              //  boardDto : 쓰기,수정 대상     BoardEntity:원본
     public boolean fileupload( BoardDto boardDto , BoardEntity boardEntity ){
-        if( boardDto.getBfile() != null ) { // ** 첨부파일 있을때
+        if(!boardDto.getBfile().getOriginalFilename().equals("")) { // ** 첨부파일 있을때
             // * 업로드 된 파일의 이름 [ 문제점 : 파일명 중복 ]
             String uuid = UUID.randomUUID().toString(); // 1. 난수생성
             String filename = uuid + "_" + boardDto.getBfile().getOriginalFilename(); // 2. 난수+파일명
@@ -99,6 +99,7 @@ public class BoardService {
             // * 첨부파일 업로드 // 3. 저장할 경로 [ 전역변수 ]
             try {
                 File uploadfile = new File(path + filename);  // 4. 경로+파일명 [ 객체화 ]
+                System.out.println("test");
                 boardDto.getBfile().transferTo(uploadfile);   // 5. 해당 객체 경로 로 업로드
             } catch (Exception e) {
                 System.out.println("첨부파일 업로드 실패 ");
@@ -155,20 +156,12 @@ public class BoardService {
         // 검색 처리
         elist = boardRepository.findbySearch( pageDto.getBcno(), pageDto.getKey(), pageDto.getKeyword(), pageable);
 
-        // 프론트엔드에 표시할 페이징번호버튼 수
-        int btncount = 5;                               // 1.페이지에 표시할 총 페이지 버튼 개수
-        int startbtn = (page/btncount) * btncount +1;   // 2. 시작번호 버튼
-        int endbtn = startbtn + btncount-1;             // 3. 마지막번호 버튼
-        if( endbtn > elist.getTotalPages() ) endbtn =elist.getTotalPages();
-
         List<BoardDto> dlist = new ArrayList<>(); // 2. 컨트롤에게 전달할때 형변환[ entity->dto ] : 역할이 달라서
         for( BoardEntity entity : elist ){ // 3. 변환
             dlist.add( entity.toDto() );
         }
 
         pageDto.setList(dlist);
-        pageDto.setStartbtn(startbtn);
-        pageDto.setEndbtn(endbtn);
         pageDto.setTotalBoards(elist.getTotalElements());
 
         return pageDto;  // 4. 변환된 리스트 dist 반환
