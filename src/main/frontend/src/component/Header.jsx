@@ -26,11 +26,13 @@ export default function Header(){
                             <>
                                 <li> <Link to="/member/signup" > 회원가입   </Link> </li>
                                 <li> <Link to="/member/login" > 로그인     </Link> </li>
+                                <li> <Link to="/chatting" > 익명 채팅방 </Link> </li>
                             </>
                         ) : (
                             <>
                                 <li> {login} </li>
                                 <li> <a href="/member/logout"> 로그아웃     </a> </li>
+                                <li> <a href="/room/write"> 방 등록     </a> </li>
                                 <li> <Link to="/book/list" > 리액트 공부방 </Link> </li>
                             </>
                         )

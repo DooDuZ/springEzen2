@@ -3,6 +3,7 @@ package com.Ezenweb.domain.entity.member;
 import com.Ezenweb.domain.dto.MemberDto;
 import com.Ezenweb.domain.entity.BaseEntity;
 import com.Ezenweb.domain.entity.board.BoardEntity;
+import com.Ezenweb.domain.entity.room.RoomEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,11 @@ public class MemberEntity extends BaseEntity {
     @Builder.Default // 빌더 사용시 해당 필드의 초기값 설정
     @ToString.Exclude
     private List<BoardEntity> boardEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberEntity" )
+    @Builder.Default
+    @ToString.Exclude
+    List<RoomEntity> roomEntityList = new ArrayList<>();
 
     @Column // 회원 등급
     private String mrol;

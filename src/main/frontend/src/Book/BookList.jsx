@@ -24,6 +24,7 @@ export default function BookList(){
                 <li> <Link to="/chapter9/LandingPage"> chapter9 </Link>  </li>
                 <li> <Link to="/chapter10/EX1_Form"> chapter10 </Link>  </li>
                 <li> <Link to="/chapter11/SignUp"> chapter11 </Link>  </li>
+                <li> <Link to="/chapter12/Calculator"> chapter12 </Link>  </li>
             </ul>
         </div>
     );

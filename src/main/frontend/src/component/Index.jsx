@@ -34,6 +34,9 @@ import ConfirmButton from "../Book/chapter8/ConfirmButton";
 import LandingPage from "../Book/chapter9/LandingPage";
 import SignUp from "../Book/chapter11/SignUp";
 import BoardView from "./board/BoardView";
+import Chatting from "./chatting/Chatting";
+import Calculator from "../Book/chapter12/Calculator";
+import RoomWrite from "./room/RoomWrite"
     // BrowserRouter : 가상 URL
     //  vs HashRouter :
     // Routes :  Route 목록/리스트
@@ -54,6 +57,8 @@ export default function Index( props ){
                         <Route path="/board/write" element={ <BoardWrite/> } />
                         <Route path="/board/view/:bno" element={ <BoardView/> } />
                         <Route path="/board/update/:bno" element={ <BoardUpdate/> } />
+                        <Route path="/chatting" element={ <Chatting/> } />
+                        <Route path="/room/write" element={ <RoomWrite/> } />
 
                         <Route path="/book/list" element={ <BookList/> } />
                         <Route path="/chapter3/Library" element={<Library />} />
@@ -64,6 +69,7 @@ export default function Index( props ){
                         <Route path="/chapter8/ConfirmButton" element={<ConfirmButton />} />
                         <Route path="/chapter9/LandingPage" element={<LandingPage />} />
                         <Route path="/chapter11/SignUp" element={<SignUp/>} />
+                        <Route path="/chapter12/Calculator" element={ <Calculator/> } />
                     </Routes>
                 <Footer/>
             </BrowserRouter>

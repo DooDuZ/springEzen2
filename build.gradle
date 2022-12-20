@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail' // 스프링 메일 전송 SMTP
     implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티[인증/인가]
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // oauth2 [ 소셜 로그인 ]
-
+    implementation 'org.springframework.boot:spring-boot-starter-websocket' // 웹 서버 소켓
 
     /*
         ORM : 객체 관계 매핑
