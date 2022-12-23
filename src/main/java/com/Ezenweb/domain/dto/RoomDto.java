@@ -17,18 +17,17 @@ public class RoomDto {
     private int rno;
     private String rtitle;
     private int rprice;
-    private String trans;
+    private String rtrans;
     private List<MultipartFile> rimg;
     private String rname;
     private String rlat;
     private String rlng;
 
-    @Autowired
-    RoomImgRepository roomImgRepository;
+    private String meamil;          // 출력용 작성자
+    private List<String> getrimg;   // 출력용 이미지
 
     public RoomEntity toEntity(){
-
-        return RoomEntity.builder().rtitle(this.rtitle).rprice(this.rprice).trans(this.trans)
+        return RoomEntity.builder().rtitle(this.rtitle).rprice(this.rprice).rtrans(this.rtrans)
                 .rname(this.rname).rlat(this.rlat).rlng(this.rlng).build();
     }
 }

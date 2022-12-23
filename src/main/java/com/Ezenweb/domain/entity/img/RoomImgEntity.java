@@ -1,9 +1,12 @@
 package com.Ezenweb.domain.entity.img;
 
+import com.Ezenweb.domain.dto.RoomDto;
 import com.Ezenweb.domain.entity.room.RoomEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "roomimg")
@@ -23,4 +26,6 @@ public class RoomImgEntity {
     @JoinColumn(name="rno")
     @ToString.Exclude
     RoomEntity roomEntity;
+
+
 }

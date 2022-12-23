@@ -53,7 +53,6 @@ export default function RoomWrite(){
             image : markerImage, // 마커의 이미지
             map: map // 마커를 표시할 지도 객체
         });
-
     } )
 
     const onWrite = () => {
