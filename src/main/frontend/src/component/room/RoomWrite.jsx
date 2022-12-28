@@ -38,7 +38,7 @@ export default function RoomWrite(){
         // console.log(mapContainer);
         var map = new kakao.maps.Map(mapContainer.current, mapOption);
 
-        var markerImageUrl = "http://localhost:8080/static/media/roomicon.b818afd964f981aed393.png",
+        var markerImageUrl = "/static/media/roomicon.b818afd964f981aed393.png",
             markerImageSize = new kakao.maps.Size(40, 42), // 마커 이미지의 크기
             markerImageOptions = {
                 offset : new kakao.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표

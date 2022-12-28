@@ -9,6 +9,7 @@ import com.Ezenweb.domain.entity.board.BoardEntity;
 import com.Ezenweb.domain.entity.board.BoardRepository;
 import com.Ezenweb.domain.entity.member.MemberEntity;
 import com.Ezenweb.domain.entity.member.MemberRepository;
+import com.Ezenweb.test.Tester;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,9 +43,17 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;// 게시물 리포지토리 객체 선언
     @Autowired
+    Tester thread;
+    public void tester(){
+        thread.run();
+    }
+
+    @Autowired
     private BcategoryRepository bcategoryRepository;
     // @Autowired
     // private  BoardService boardService; // 불가능
+
+
 
     // 첨부파일 경로
     String path = "C:\\upload\\";

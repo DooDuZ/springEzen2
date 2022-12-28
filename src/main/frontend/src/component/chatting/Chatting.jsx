@@ -6,7 +6,7 @@ import React, {useState, useEffect, useRef} from "react";
 
 export default function Chatting(props){
 
-    const webSocketUrl = 'ws://localhost:8080/chat'
+    const webSocketUrl = 'ws://ec2-54-180-160-207.ap-northeast-2.compute.amazonaws.com:8080/chat'
     const [ socketCon, setSocketCon ] = useState(false);
     const [ msgList, setMsgList ] = useState( [] );
 

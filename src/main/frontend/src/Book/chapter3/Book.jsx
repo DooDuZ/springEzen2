@@ -7,7 +7,7 @@ import React from 'react';
 function Book( props ) { // : props 매개변수[인수] !!! : 속성
 
     // -- 비동기 [백엔드 서버와 통신 ]  ajax vs fetch  -- //
-    fetch("http://localhost:8080/member/list")  // 통신할 url
+    fetch("/member/list")  // 통신할 url
         .then( (response) =>  response.json() ) // 응답 자료형
         .then( (data) => console.log( data) );  // 응답
         // CORS 오류

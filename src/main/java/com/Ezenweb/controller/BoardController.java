@@ -25,7 +25,7 @@ public class BoardController {
             // private BoardService boardService = new BoardService();
         // 2. @Autowired 어노테이션 이용해서 Spring 컨테이너에 빈[메모리] 생성
     @Autowired
-    private BoardService boardService= new BoardService();
+    private BoardService boardService;
 /*
 
     // ------------2.페이지[html] 요청 로드 [view] HTML 반환 매핑 -->[ 리액트 시 사용X ]---------------//
@@ -100,5 +100,12 @@ public class BoardController {
     @GetMapping("/filedownload")
     public void filedownload( @RequestParam("filename") String filename ){
         boardService.filedownload( filename );
+    }
+
+    @GetMapping("/tester")
+    public boolean tester(){
+        System.out.println("tester 접근 controll");
+        boardService.tester();
+        return true;
     }
 }

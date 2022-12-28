@@ -11,6 +11,11 @@ export default function Home( props ) {
     const handleClose = () => setShow(false);
     const [selectIndex, setSelectIndex] = useState(0);
 
+    const tester= () => {
+        axios.get("/test/tester").then(res=>{console.log(res);})
+    }
+
+
     /* ---------  룸 데이터 ------------------*/
     const [ roomList , setRoomList ] = useState([{ getrimg : []}]);
     // useEffect( ()=>{ axios } , [] );
@@ -38,7 +43,7 @@ export default function Home( props ) {
 
 
         /* ------- 마커 이미지 --------------- */
-        var markerImageUrl = 'http://localhost:8080/static/media/roomicon.b818afd964f981aed393.png',
+        var markerImageUrl = '/static/media/roomicon.b818afd964f981aed393.png',
             markerImageSize = new kakao.maps.Size(40, 42), // 마커 이미지의 크기
             markerImageOptions = {
                 offset : new kakao.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
@@ -76,7 +81,9 @@ export default function Home( props ) {
                     <RoomCarousel imges={roomList[selectIndex]} />
                 </Offcanvas.Body>
             </Offcanvas>
-
+            <div>
+                <button onClick={tester}>tester</button>
+            </div>
 
             <div>
                 <div id="map" ref={ mapContainer } style={{width:'100%',height:'600px'}} ></div>
